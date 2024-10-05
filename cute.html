@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: cursive, sans-serif;
+            background: url('hearts.jpg') no-repeat center center fixed; 
+            background-size: cover; 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); 
+            padding: 40px; 
+            border: 10px solid rgb(190, 0, 0); 
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px; 
+            width: 100%; 
+            position: relative; 
+            transform: perspective(1000px) rotateY(5deg); /* 3D effect */
+        }
+        .pic {
+            width: 250px; /* Increased width */
+            height: 250px; /* Increased height */
+            border-radius: 10%;
+            object-fit: cover;
+            margin: 0 auto 20px; 
+            display: block; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow for image */
+            transition: transform 0.3s; /* Smooth transition */
+        }
+        .pic:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        h1 {
+            font-size: 2em; 
+        }
+        p {
+            font-size: 1.2em; 
+        }
+        .button-container {
+            display: flex; 
+            justify-content: center; 
+            margin-top: 20px; 
+        }
+        button {
+            padding: 15px 30px; 
+            font-family: cursive, sans-serif;
+            font-size: 18px; 
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #7c0000;
+            color: white;
+            margin: 0 10px; 
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Shadow for button */
+        }
+        button:hover {
+            background-color: #e20101; 
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="welcomeContainer">
+        <h1><i class="far fa-heart"></i>  Welcome Baby  <i class="far fa-heart"></i></h1>
+        <img src="love.jpg" alt="Profile Picture" class="pic">
+        <p>Are you ready !!</p>
+        <button id="testButton">Press To Test</button>
+    </div>
+
+    <script>
+        document.getElementById('testButton').addEventListener('click', function() {
+            document.getElementById('welcomeContainer').innerHTML = `
+                <h1>DO U LOVE ME?</h1>
+                <div class="button-container">
+                    <button id="yesButton">Yes</button>
+                    <button id="noButton">No</button>
+                </div>
+            `;
+
+            document.getElementById('yesButton').addEventListener('click', function() {
+                document.getElementById('welcomeContainer').innerHTML = `
+                    <h1>Here's a kiss from MERY</h1>
+                    <img src="kiss.jpg" alt="Kiss Image" class="pic">
+                    <h2><i class="far fa-heart"></i> I LOVE U TOO <i class="far fa-heart"></i></h2>
+                `;
+            });
+
+            const noButton = document.getElementById('noButton');
+            const container = document.getElementById('welcomeContainer');
+
+            noButton.addEventListener('mouseover', function() {
+                // Get the container dimensions
+                const containerRect = container.getBoundingClientRect();
+                const buttonRect = noButton.getBoundingClientRect();
+
+                // Calculate the maximum offsets
+                const maxOffsetX = containerRect.width - buttonRect.width;
+                const maxOffsetY = containerRect.height - buttonRect.height;
+
+                // Move the No button to a new random position within container limits
+                const offsetX = Math.random() * maxOffsetX;
+                const offsetY = Math.random() * maxOffsetY;
+
+                // Apply the transformation
+                noButton.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            });
+        });
+    </script>
+
+</body>
+</html>
